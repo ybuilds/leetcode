@@ -1,37 +1,29 @@
 package arrays;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RemoveDuplicateFromSortedArray {
     public static int removeDuplicates(int[] nums) {
-        int duplicates=0, i=0, j=1, k=1;
+        int duplicate=0, i=0, j=1, k=1;
 
-        while(i < nums.length && j < nums.length) {
-            while(nums[i] == nums[j]) {
-                duplicates++;
+        while(j<nums.length) {
+            while(j<nums.length && nums[i] == nums[j]) {
+                duplicate++;
                 j++;
             }
-            nums[k++] = nums[j];
+
+            if(j < nums.length)
+                nums[k++] = nums[j];
+
             i = j++;
         }
 
-        for(k=nums.length-duplicates; k<nums.length; k++)
-            nums[k] = Integer.MAX_VALUE;
+        for(int num: nums)
+            System.out.print(num + " ");
 
-        List<Integer> res = new ArrayList<>();
-        for(int num: nums) {
-            if(num != Integer.MAX_VALUE)
-                res.add(num);
-        }
-
-        System.out.println(res);
-
-        return duplicates;
+        return nums.length-duplicate;
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[] {1,1,2};
+        int[] nums = new int[] {1,2,3,3,3};
         System.out.println(removeDuplicates(nums));
     }
 }
